@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card-modern">
+<h4>Nuevo Pedido</h4>
+
+<form action="/guardar" method="POST">
+<input name="cliente" class="form-control mb-2" placeholder="Cliente">
+<input name="producto" class="form-control mb-2" placeholder="Producto">
+<input name="cantidad" type="number" class="form-control mb-2">
+
+<button class="btn btn-primary">Guardar</button>
+</form>
+
+</div>
+
+{% endblock %}
