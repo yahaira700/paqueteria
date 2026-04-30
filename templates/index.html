@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row mb-3">
+  <div class="col"><div class="stat stat1">Total: {{ pedidos|length }}</div></div>
+  <div class="col"><div class="stat stat2">Pendientes: {{ pedidos|selectattr("estado","equalto","Pendiente")|list|length }}</div></div>
+  <div class="col"><div class="stat stat3">Entregados: {{ pedidos|selectattr("estado","equalto","Entregado")|list|length }}</div></div>
+</div>
+
+<div class="card-modern">
+
+<a href="/crear" class="btn btn-primary mb-3">+ Nuevo</a>
+
+<table class="table">
+<thead>
+<tr>
+<th>Cliente</th>
+<th>Producto</th>
+<th>Cantidad</th>
+<th>Estado</th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+{% for p in pedidos %}
+<tr>
+<td>{{ p.cliente }}</td>
+<td>{{ p.producto }}</td>
+<td>{{ p.cantidad }}</td>
+<td>
+{% if p.estado == "Pendiente" %}
+<span class="badge pendiente">Pendiente</span>
+{% elif p.estado == "Enviado" %}
+<span class="badge enviado">Enviado</span>
+{% else %}
+<span class="badge entregado">Entregado</span>
+{% endif %}
+</td>
+<td>
+<a href="/editar/{{ p._id }}" class="btn btn-sm btn-light">Editar</a>
+<a href="/eliminar/{{ p._id }}" class="btn btn-sm btn-danger">Eliminar</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+</div>
+
+{% endblock %}
